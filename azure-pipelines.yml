@@ -8,20 +8,22 @@ variables:
   buildConfiguration: 'Release'
     
 steps:
+displayName: 'Only show console echo"
 - script: |
     echo Iniciando o teste do Pipeline
 
 - task: DotNetCoreCLI@2
+  displayName: 'Restore packages"
   inputs:
     command: 'restore'
     feedsToUse: 'select'
     vstsFeed: 'my-vsts-feed' # A series of numbers and letters
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build application"
   inputs:
     command: 'build'
     arguments: '--configuration $(buildConfiguration)'
-  displayName: 'dotnet build $(buildConfiguration)'
 
 #- task: DotNetCoreCLI@2
 #  inputs:
@@ -36,14 +38,15 @@ steps:
 #    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 # Publicar artefatos no Azure
-#- task: DotNetCoreCLI@2
-#  inputs:
-#    command: publish
-#    publishWebProjects: True
-#    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-#    zipAfterPublish: True
+- task: DotNetCoreCLI@2
+  displayName: 'Create artifact"
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 
-#- task: PublishBuildArtifacts@1
-#  inputs:
-#    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-#    artifactName: 'FamilyTreeExampleCI'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'FamilyTreeExampleCI'
