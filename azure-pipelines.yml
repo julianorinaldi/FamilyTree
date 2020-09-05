@@ -8,9 +8,9 @@ variables:
   buildConfiguration: 'Release'
     
 steps:
-displayName: 'Only show console echo"
 - script: |
     echo Iniciando o teste do Pipeline
+  displayName: 'Only show console echo"
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore packages"
