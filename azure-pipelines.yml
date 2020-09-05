@@ -13,17 +13,17 @@ steps:
   displayName: 'Only show console echo"
 
 - task: DotNetCoreCLI@2
-  displayName: 'Restore packages"
   inputs:
     command: 'restore'
     feedsToUse: 'select'
     vstsFeed: 'my-vsts-feed' # A series of numbers and letters
+  displayName: 'Restore packages"
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build application"
   inputs:
     command: 'build'
     arguments: '--configuration $(buildConfiguration)'
+  displayName: 'Build application"
 
 #- task: DotNetCoreCLI@2
 #  inputs:
@@ -39,13 +39,13 @@ steps:
 
 # Publicar artefatos no Azure
 - task: DotNetCoreCLI@2
-  displayName: 'Create artifact"
   inputs:
     command: publish
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
-
+  displayName: 'Create artifact"
+  
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
