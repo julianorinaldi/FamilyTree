@@ -10,20 +10,17 @@ variables:
 steps:
 - script: |
     echo Iniciando o teste do Pipeline
-  displayName: 'Only show console echo"
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     feedsToUse: 'select'
     vstsFeed: 'my-vsts-feed' # A series of numbers and letters
-  displayName: 'Restore packages"
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     arguments: '--configuration $(buildConfiguration)'
-  displayName: 'Build application"
 
 #- task: DotNetCoreCLI@2
 #  inputs:
@@ -44,7 +41,6 @@ steps:
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
-  displayName: 'Create artifact"
   
 - task: PublishBuildArtifacts@1
   inputs:
