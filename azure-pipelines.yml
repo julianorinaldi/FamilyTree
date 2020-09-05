@@ -9,9 +9,7 @@ variables:
     
 steps:
 - script: |
-    echo ${{ variables.one }} # outputs initialValue
-    echo $(one)
-  displayName: First variable pass
+    echo Apenas um teste
 
 #- task: DotNetCoreCLI@2
 #  inputs:
